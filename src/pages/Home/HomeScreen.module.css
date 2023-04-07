@@ -1,0 +1,43 @@
+.HomeScreen {
+  background-color: rgb(0, 0, 0);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ExplorerContainer {
+  height: 205px;
+  width: 320px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ExplorerText {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 29px;
+  padding: 40px 0px;
+}
+
+.ExplorerInput {
+  height: 44px;
+  width: 320px;
+  padding: 0px 10px;
+  background: #0a0a0a;
+  color: #fff;
+  border: 1px solid #292929;
+  border-radius: 4px;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 22px;
+}
