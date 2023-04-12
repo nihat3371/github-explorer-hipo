@@ -1,12 +1,15 @@
 import React, { useState, useMemo } from "react";
 import styles from "./SearchBar.module.css";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import Results from "../Results/Results";
 
 function Hahh() {
   const [username, setUsername] = useState("");
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [cache, setCache] = useState({});
+  const navigate = useNavigate();
 
   const fetchData = (username) => {
     setIsLoading(true);
@@ -33,6 +36,7 @@ function Hahh() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    navigate(`/${username}`);
     if (username) {
       if (cache[username]) {
         setUserData(cache[username]);
@@ -56,22 +60,6 @@ function Hahh() {
           Search
         </button>
       </form>
-      {isLoading && <Loading />}
-      {cachedData && (
-        <div className={styles.ResultContainer}>
-          <h2>User Data</h2>
-          <p>Name: {cachedData.name}</p>
-          <p>Public Repos: {cachedData.public_repos}</p>
-        </div>
-      )}
-      {userData && !cachedData && (
-        <div className={styles.ResultContainer}>
-          {" "}
-          <h2>User Data</h2>
-          <p>Name: {userData.name}</p>
-          <p>Public Repos: {userData.public_repos}</p>
-        </div>
-      )}
     </div>
   );
 }
