@@ -1,8 +1,6 @@
 import React, { useState, useMemo } from "react";
 import styles from "./SearchBar.module.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import Loading from "../Loading/Loading";
-import Results from "../Results/Results";
+import { useNavigate } from "react-router-dom";
 
 function Hahh() {
   const [username, setUsername] = useState("");

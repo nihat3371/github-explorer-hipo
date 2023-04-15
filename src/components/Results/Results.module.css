@@ -1,0 +1,114 @@
+body {
+  color: white;
+  background-color: black;
+}
+
+.ResultContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.userCard {
+  width: 548px;
+  height: 277px;
+  position: relative;
+  background-color: #0a0a0a;
+  border-radius: 10px;
+  border: 1px solid #202020;
+  bottom: 150px;
+}
+.userHeader {
+  display: flex;
+  border-radius: 10px;
+  flex-direction: row;
+  height: 50%;
+  align-items: center;
+  justify-content: space-between;
+}
+.userInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.userImg {
+  position: relative;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  bottom: 85px;
+}
+.userName {
+  position: absolute;
+  font-size: 18px;
+  font-weight: 500;
+  padding-top: 25px;
+}
+.userLogin {
+  position: absolute;
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 72px;
+}
+
+.userLinkContainer {
+  position: absolute;
+  margin-left: 380px;
+  margin-bottom: 125px;
+}
+
+.userLink {
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: inherit;
+}
+
+.backArrow {
+  position: absolute;
+  padding-left: 25px;
+  padding-bottom: 50px;
+}
+
+.LinkIcon {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.userInfoBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.BoxText {
+  font-size: 14px;
+  font-weight: 500;
+  position: absolute;
+  margin-top: 50px;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.RepositoryText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
