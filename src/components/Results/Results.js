@@ -8,7 +8,13 @@ import LinkIcon from "../../assets/LinkIcon.svg";
 function Results() {
   const { userName } = useParams();
   const [userData, setUserData] = useState();
+  const [repos, setRepos] = useState([]);
   const navigate = useNavigate();
+  const [visible, setVisible] = useState(2);
+
+  const loadMore = () => {
+    setVisible((prevValue) => prevValue + 2);
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -18,8 +24,12 @@ function Results() {
         );
         const data = await response.json();
         setUserData(data);
+
+        const repoResponse = await fetch(data.repos_url);
+        const repoData = await repoResponse.json();
+        setRepos(repoData);
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
 
@@ -73,8 +83,23 @@ function Results() {
             <br /> <h1 className={styles.BoxText}>Followers</h1>
           </div>
         </div>
-        <h1 className={styles.RepositoryText}>Repositories</h1>
+        <h6 className={styles.RepositoryText}>Repositories</h6>
       </div>
+      {repos.slice(0, visible).map((repo) => (
+        <div key={repo.id} className={styles.repoCard}>
+          <div className={styles.repoCardText}>
+            <div className={styles.repoCardText}>{repo.name}</div>
+            <div className={styles.repoCardDesc}>{repo.description}...</div>
+          </div>
+          <div className={styles.repoCardText}>
+            <div className={styles.repoStar}>{repo.stargazers_count}</div>
+            <div className={styles.repoStarDesc}>Stars</div>
+          </div>
+        </div>
+      ))}
+      <button onClick={loadMore} className={styles.ButtonMore}>
+        Load More
+      </button>
     </div>
   );
 }

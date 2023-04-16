@@ -17,13 +17,13 @@ body {
   height: 277px;
   position: relative;
   background-color: #0a0a0a;
-  border-radius: 10px;
+  border-radius: 4px;
   border: 1px solid #202020;
-  bottom: 150px;
+  bottom: 75px;
 }
 .userHeader {
   display: flex;
-  border-radius: 10px;
+  border-radius: 4px;
   flex-direction: row;
   height: 50%;
   align-items: center;
@@ -65,7 +65,7 @@ body {
 .userLinkContainer {
   position: absolute;
   margin-left: 380px;
-  margin-bottom: 125px;
+  margin-bottom: 100px;
 }
 
 .userLink {
@@ -107,8 +107,64 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
+  margin-top: 40px;
+}
+
+.repoCard {
+  display: flex;
+  margin-top: 17px;
+  width: 548px;
+  height: 91px;
+  background-color: #0a0a0a;
+  border-radius: 4px;
+  border: 1px solid #202020;
+  justify-content: center;
+  align-items: center;
+}
+.repoCardText {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 20px;
+  height: 40px;
+  width: 100%;
+  font-size: 14px;
+}
+.repoCardDesc {
+  margin-left: 20px;
+  color: #acacac;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 40px;
+}
+
+.repoStar {
+  position: relative;
+  left: 180px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.repoStarDesc {
+  position: relative;
+  left: 180px;
+  color: #acacac;
+}
+.ButtonMore {
+  position: relative;
+  margin-top: 20px;
+  width: 548px;
+  height: 44px;
+  background-color: #0a0a0a;
+  background: #0da090;
+  border: 1px solid #72f2e4;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
 }
