@@ -15,7 +15,7 @@ body {
 .userCard {
   width: 548px;
   height: 277px;
-  position: relative;
+  position: inherit;
   background-color: #0a0a0a;
   border-radius: 4px;
   border: 1px solid #202020;
@@ -110,7 +110,7 @@ body {
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
-  margin-top: 40px;
+  padding-bottom: 5px;
 }
 
 .repoCard {

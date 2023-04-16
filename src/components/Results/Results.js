@@ -83,8 +83,8 @@ function Results() {
             <br /> <h1 className={styles.BoxText}>Followers</h1>
           </div>
         </div>
-        <h6 className={styles.RepositoryText}>Repositories</h6>
       </div>
+      <h6 className={styles.RepositoryText}>Repositories</h6>
       {repos.slice(0, visible).map((repo) => (
         <div key={repo.id} className={styles.repoCard}>
           <div className={styles.repoCardText}>
