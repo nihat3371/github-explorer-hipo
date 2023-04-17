@@ -7,10 +7,12 @@ import LinkIcon from "../../assets/LinkIcon.svg";
 
 function Results() {
   const { userName } = useParams();
+
   const [userData, setUserData] = useState();
-  const [repos, setRepos] = useState([]);
-  const navigate = useNavigate();
   const [visible, setVisible] = useState(2);
+  const [repos, setRepos] = useState([]);
+
+  const navigate = useNavigate();
 
   const loadMore = () => {
     setVisible((prevValue) => prevValue + 2);

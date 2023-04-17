@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import styles from "./SearchBar.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -12,25 +12,20 @@ function Hahh() {
   const fetchData = (username) => {
     setIsLoading(true);
     fetch(`https://api.github.com/users/${username}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setUserData(data);
-        setIsLoading(false);
-        setCache((prevCache) => ({ ...prevCache, [username]: data }));
+      .then((response) => {
+        if (!response.ok) {
+          navigate(`NotFound`);
+        }
+        return response.json();
       })
-      .catch((error) => {
-        console.error(error);
+      .then((data) => {
+        if (data.id === 0) {
+          navigate(`*`);
+        }
+        setUserData(data);
         setIsLoading(false);
       });
   };
-
-  const cachedData = useMemo(() => {
-    if (cache[username]) {
-      return cache[username];
-    } else {
-      return null;
-    }
-  }, [cache, username]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,6 +36,8 @@ function Hahh() {
       } else {
         fetchData(username);
       }
+    } else {
+      navigate(`NotFound`);
     }
   };
 

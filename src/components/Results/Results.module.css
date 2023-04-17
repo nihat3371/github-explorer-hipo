@@ -21,6 +21,7 @@ body {
   border: 1px solid #202020;
   bottom: 75px;
 }
+
 .userHeader {
   display: flex;
   border-radius: 4px;
@@ -124,6 +125,11 @@ body {
   justify-content: center;
   align-items: center;
 }
+.repoCard:hover {
+  background-color: white;
+  color: #0a0a0a;
+}
+
 .repoCardText {
   display: flex;
   flex-direction: column;
@@ -143,13 +149,13 @@ body {
 
 .repoStar {
   position: relative;
-  left: 180px;
+  margin-left: 180px;
   font-size: 18px;
   font-weight: 500;
 }
 .repoStarDesc {
   position: relative;
-  left: 180px;
+  margin-left: 180px;
   color: #acacac;
 }
 .ButtonMore {
