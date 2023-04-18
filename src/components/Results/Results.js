@@ -88,7 +88,12 @@ function Results() {
       </div>
       <h6 className={styles.RepositoryText}>Repositories</h6>
       {repos.slice(0, visible).map((repo) => (
-        <a href={repo.html_url} key={repo.id} className={styles.repoCard}>
+        <a
+          href={repo.html_url}
+          target="_blank"
+          key={repo.id}
+          className={styles.repoCard}
+        >
           <div className={styles.repoCardText}>
             <div className={styles.repoCardText}>{repo.name}</div>
             <div className={styles.repoCardDesc}>{repo.description}...</div>
