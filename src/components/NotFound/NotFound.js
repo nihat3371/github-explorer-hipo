@@ -9,7 +9,7 @@ const NotFound = () => {
     <div className={styles.Loading}>
       <div className={styles.LoadingSkeletonCard}>
         <div className={styles.NotFound}>
-          <img src={Hipo} alt="Hipo Logo" />
+          <img className={styles.HipoImg} src={Hipo} alt="Hipo Logo" />
           Hey! You picked the wrong h(ip)ouse! Just joking, there is no result
           that I can show you unfortunately... Here, click this awesome button
           to go back!

@@ -88,7 +88,7 @@ function Results() {
       </div>
       <h6 className={styles.RepositoryText}>Repositories</h6>
       {repos.slice(0, visible).map((repo) => (
-        <div key={repo.id} className={styles.repoCard}>
+        <a href={repo.html_url} key={repo.id} className={styles.repoCard}>
           <div className={styles.repoCardText}>
             <div className={styles.repoCardText}>{repo.name}</div>
             <div className={styles.repoCardDesc}>{repo.description}...</div>
@@ -97,11 +97,11 @@ function Results() {
             <div className={styles.repoStar}>{repo.stargazers_count}</div>
             <div className={styles.repoStarDesc}>Stars</div>
           </div>
-        </div>
+        </a>
       ))}
-      <button onClick={loadMore} className={styles.ButtonMore}>
+      <div onClick={loadMore} className={styles.ButtonMore}>
         Load More
-      </button>
+      </div>
     </div>
   );
 }
