@@ -63,7 +63,11 @@ function Results() {
             <h6 className={styles.userName}>{userData.name}</h6>
             <h6 className={styles.userLogin}> @{userData.login}</h6>
             <div className={styles.userLinkContainer}>
-              <a href={userData.html_url} className={styles.userLink}>
+              <a
+                target="_blank"
+                href={userData.html_url}
+                className={styles.userLink}
+              >
                 View on Github
               </a>
               <img className={styles.LinkIcon} src={LinkIcon} alt="Link Icon" />
