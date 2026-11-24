@@ -5,6 +5,12 @@ import styles from "./Results.module.css";
 import BackArrow from "../../assets/BackArrow.svg";
 import LinkIcon from "../../assets/LinkIcon.svg";
 
+const fmt = (n) =>
+  new Intl.NumberFormat("en", {
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(n ?? 0);
+
 function Results() {
   const { userName } = useParams();
 
@@ -54,82 +60,119 @@ function Results() {
   }
 
   return (
-    <div className={styles.ResultContainer}>
-      <div className={styles.userCard}>
-        <div className={styles.userHeader}>
-          <img
-            onClick={() => navigate(-1)}
-            className={styles.backArrow}
-            src={BackArrow}
-            alt="Back Arrow"
-            role="button"
-          />
+    <div className={styles.container}>
+      <div className={styles.topBar}>
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          aria-label="Back"
+          className={styles.backButton}
+        >
+          <img className={styles.backIcon} src={BackArrow} alt="" />
+          <span>Back</span>
+        </button>
 
-          <div className={styles.imgContainer}>
-            <img
-              className={styles.userImg}
-              src={userData.avatar_url}
-              alt="User Avatar"
-            />
-
-            <h6 className={styles.userName}>
-              {userData.name || userData.login}
-            </h6>
-            <h6 className={styles.userLogin}> @{userData.login}</h6>
-            <div className={styles.userLinkContainer}>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={userData.html_url}
-                className={styles.userLink}
-              >
-                View on Github
-              </a>
-              <img className={styles.LinkIcon} src={LinkIcon} alt="Link Icon" />
-            </div>
-          </div>
-        </div>
-        <div className={styles.userHeader}>
-          <div className={styles.userInfoBox}>
-            {userData.public_repos}
-            <br />
-            <h1 className={styles.BoxText}>Repositories</h1>
-          </div>
-          <div className={styles.userInfoBox}>
-            {userData.following}
-            <br /> <h1 className={styles.BoxText}>Following</h1>
-          </div>
-          <div className={styles.userInfoBox}>
-            {userData.followers}
-            <br /> <h1 className={styles.BoxText}>Followers</h1>
-          </div>
-        </div>
-      </div>
-      <h6 className={styles.RepositoryText}>Repositories</h6>
-      {repos.slice(0, visible).map((repo) => (
         <a
-          href={repo.html_url}
+          className={styles.githubLink}
+          href={userData.html_url}
           target="_blank"
           rel="noopener noreferrer"
-          key={repo.id}
-          className={styles.repoCard}
         >
-          <div className={styles.repoCardText}>
-            <div className={styles.repoCardText}>{repo.name}</div>
-            {repo.description ? (
-              <div className={styles.repoCardDesc}>{repo.description}</div>
-            ) : null}
-          </div>
-          <div className={styles.repoCardText}>
-            <div className={styles.repoStar}>{repo.stargazers_count}</div>
-            <div className={styles.repoStarDesc}>Stars</div>
-          </div>
+          <span>View on GitHub</span>
+          <img className={styles.linkIcon} src={LinkIcon} alt="" />
         </a>
-      ))}
-      {visible < repos.length ? (
-        <div onClick={loadMore} className={styles.ButtonMore}>
-          Load More
+      </div>
+
+      <div className={styles.profileHeader}>
+        <img
+          className={styles.avatar}
+          src={userData.avatar_url}
+          alt={`${userData.login} avatar`}
+        />
+        <div className={styles.profileInfo}>
+          <div className={styles.name}>
+            {userData.name || userData.login}
+          </div>
+          <div className={styles.login}>@{userData.login}</div>
+          {userData.bio ? <p className={styles.bio}>{userData.bio}</p> : null}
         </div>
+      </div>
+
+      <div className={styles.stats}>
+        <div className={styles.stat}>
+          <span className={styles.statValue}>
+            {fmt(userData.public_repos)}
+          </span>
+          <span className={styles.statLabel}>Repositories</span>
+        </div>
+        <div className={styles.stat}>
+          <span className={styles.statValue}>{fmt(userData.following)}</span>
+          <span className={styles.statLabel}>Following</span>
+        </div>
+        <div className={styles.stat}>
+          <span className={styles.statValue}>{fmt(userData.followers)}</span>
+          <span className={styles.statLabel}>Followers</span>
+        </div>
+      </div>
+
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.sectionTitle}>Repositories</h2>
+        <span className={styles.sectionMeta}>
+          Recently updated · {Math.min(visible, repos.length)} of{" "}
+          {fmt(userData.public_repos)}
+        </span>
+      </div>
+
+      {repos.length === 0 ? (
+        <p className={styles.emptyState}>No public repositories yet.</p>
+      ) : (
+        <ul className={styles.repoList}>
+          {repos.slice(0, visible).map((repo) => (
+            <li key={repo.id}>
+              <a
+                href={repo.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.repoLink}
+              >
+                <div className={styles.repoMain}>
+                  <div className={styles.repoName}>{repo.name}</div>
+                  {repo.description ? (
+                    <div className={styles.repoDesc}>{repo.description}</div>
+                  ) : null}
+                  <div className={styles.repoMeta}>
+                    {repo.language ? (
+                      <span className={styles.repoLanguage}>
+                        <span
+                          className={styles.languageDot}
+                          aria-hidden="true"
+                        />
+                        {repo.language}
+                      </span>
+                    ) : null}
+                    <span>
+                      Updated{" "}
+                      {new Date(repo.updated_at).toLocaleDateString("en", {
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </div>
+                </div>
+                <div className={styles.repoStars}>
+                  <span aria-hidden="true">★</span>{" "}
+                  {fmt(repo.stargazers_count)}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {visible < repos.length ? (
+        <button type="button" onClick={loadMore} className={styles.loadMore}>
+          Load more
+        </button>
       ) : null}
     </div>
   );

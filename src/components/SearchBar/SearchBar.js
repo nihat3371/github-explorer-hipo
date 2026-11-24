@@ -16,19 +16,28 @@ function SearchBar() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.SearchBar}>
+      <form className={styles.SearchForm} onSubmit={handleSubmit}>
         <input
           placeholder="Enter a GitHub username"
           className={styles.SearchInput}
           type="text"
+          aria-label="GitHub username"
+          autoFocus
+          autoComplete="off"
+          spellCheck={false}
           value={username}
           onChange={(event) => setUsername(event.target.value)}
         />
-        <button className={styles.SearchButton} type="submit">
+        <button
+          className={styles.SearchButton}
+          type="submit"
+          disabled={!username.trim()}
+        >
           Search
         </button>
       </form>
+      <p className={styles.Hint}>Press Enter to search</p>
     </div>
   );
 }
