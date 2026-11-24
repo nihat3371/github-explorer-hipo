@@ -1,6 +1,8 @@
 # GitHub Profile Explorer
 
-Search a GitHub username, see their profile card and repositories sorted by last update. Built for the Hipo Labs 2023 frontend challenge with plain React and CSS modules, no UI libraries per challenge rules.
+Type a GitHub username, get their profile and repos, newest first.
+
+My internship project at Hipo Labs, 2023. The rules: plain React and CSS, no UI libraries, no shortcuts. Dusted off in 2026 with a cleaner layout, mobile support and a few bug fixes. The hippo stayed.
 
 ## Run
 
@@ -27,4 +29,4 @@ Uses the public GitHub API without a token, so it is rate limited to 60 requests
 
 ## License
 
-Hipo Labs Frontend Challenge 2023
+Built for Hipo Labs, 2023.
