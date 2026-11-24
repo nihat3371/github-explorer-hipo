@@ -2,43 +2,17 @@ import React, { useState } from "react";
 import styles from "./SearchBar.module.css";
 import { useNavigate } from "react-router-dom";
 
-function Hahh() {
+function SearchBar() {
   const [username, setUsername] = useState("");
-  const [userData, setUserData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [cache, setCache] = useState({});
   const navigate = useNavigate();
-
-  const fetchData = (username) => {
-    setIsLoading(true);
-    fetch(`https://api.github.com/users/${username}`)
-      .then((response) => {
-        if (!response.ok) {
-          navigate(`NotFound`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.id === 0) {
-          navigate(`*`);
-        }
-        setUserData(data);
-        setIsLoading(false);
-      });
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate(`/${username}`);
-    if (username) {
-      if (cache[username]) {
-        setUserData(cache[username]);
-      } else {
-        fetchData(username);
-      }
-    } else {
-      navigate(`NotFound`);
+    const name = username.trim();
+    if (!name) {
+      return;
     }
+    navigate("/" + encodeURIComponent(name));
   };
 
   return (
@@ -59,4 +33,4 @@ function Hahh() {
   );
 }
 
-export default Hahh;
+export default SearchBar;

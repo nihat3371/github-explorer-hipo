@@ -5,10 +5,10 @@ import NotFound from "./components/NotFound/NotFound";
 function App() {
   return (
     <Routes>
-      <Route exact path="/" element={<HomeScreen />} />
+      <Route path="/" element={<HomeScreen />} />
       <Route path=":userName" element={<Results />} />
-      <Route path="*" element={<NotFound />} />
       <Route path="NotFound" element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

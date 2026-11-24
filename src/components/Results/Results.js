@@ -20,23 +20,34 @@ function Results() {
 
   useEffect(() => {
     const fetchUserData = async () => {
+      setVisible(2);
+      setUserData(undefined);
+      setRepos([]);
       try {
         const response = await fetch(
           `https://api.github.com/users/${userName}`
         );
+        if (!response.ok) {
+          navigate("/NotFound", { replace: true });
+          return;
+        }
         const data = await response.json();
         setUserData(data);
 
-        const repoResponse = await fetch(data.repos_url);
+        const repoResponse = await fetch(
+          `${data.repos_url}?per_page=100&sort=updated`
+        );
         const repoData = await repoResponse.json();
-        setRepos(repoData);
+        if (Array.isArray(repoData)) {
+          setRepos(repoData);
+        }
       } catch (error) {
-        console.log(error);
+        navigate("/NotFound", { replace: true });
       }
     };
 
     fetchUserData();
-  }, [userName]);
+  }, [userName, navigate]);
 
   if (!userData) {
     return <Loading />;
@@ -51,6 +62,7 @@ function Results() {
             className={styles.backArrow}
             src={BackArrow}
             alt="Back Arrow"
+            role="button"
           />
 
           <div className={styles.imgContainer}>
@@ -60,11 +72,14 @@ function Results() {
               alt="User Avatar"
             />
 
-            <h6 className={styles.userName}>{userData.name}</h6>
+            <h6 className={styles.userName}>
+              {userData.name || userData.login}
+            </h6>
             <h6 className={styles.userLogin}> @{userData.login}</h6>
             <div className={styles.userLinkContainer}>
               <a
                 target="_blank"
+                rel="noopener noreferrer"
                 href={userData.html_url}
                 className={styles.userLink}
               >
@@ -95,12 +110,15 @@ function Results() {
         <a
           href={repo.html_url}
           target="_blank"
+          rel="noopener noreferrer"
           key={repo.id}
           className={styles.repoCard}
         >
           <div className={styles.repoCardText}>
             <div className={styles.repoCardText}>{repo.name}</div>
-            <div className={styles.repoCardDesc}>{repo.description}...</div>
+            {repo.description ? (
+              <div className={styles.repoCardDesc}>{repo.description}</div>
+            ) : null}
           </div>
           <div className={styles.repoCardText}>
             <div className={styles.repoStar}>{repo.stargazers_count}</div>
@@ -108,9 +126,11 @@ function Results() {
           </div>
         </a>
       ))}
-      <div onClick={loadMore} className={styles.ButtonMore}>
-        Load More
-      </div>
+      {visible < repos.length ? (
+        <div onClick={loadMore} className={styles.ButtonMore}>
+          Load More
+        </div>
+      ) : null}
     </div>
   );
 }
